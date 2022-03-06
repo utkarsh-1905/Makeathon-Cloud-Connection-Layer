@@ -8,6 +8,7 @@ const cors = require("cors");
 const mongoose = require("mongoose");
 const crypto = require("crypto");
 const fs = require("fs");
+const http = require("http").Server(app);
 const morgan = require("morgan");
 const Parameter = require("./parameters");
 
@@ -31,6 +32,7 @@ app.use(morgan("dev"));
 
 app.post("/api/sendParameters", async (req, res) => {
   const data = req.body;
+  // console.log(data);
   const decyptedData = crypto.privateDecrypt(
     {
       key: private_key,
@@ -53,7 +55,7 @@ app.post("/api/sendParameters", async (req, res) => {
     status: "OK",
   });
 });
-
-app.listen(process.env.PORT || 5000, () =>
+// "192.168.113.196"
+http.listen(process.env.PORT || 5000, "192.168.113.196", () =>
   console.log("Server started at port 5000")
 );
