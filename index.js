@@ -66,6 +66,6 @@ app.get("/api/getParameters", async (req, res) => {
 });
 
 // "192.168.113.196"
-http.listen(process.env.PORT || 5000, "192.168.113.196", () =>
+http.listen(process.env.PORT || 5000, () =>
   console.log("Server started at port 5000")
 );
