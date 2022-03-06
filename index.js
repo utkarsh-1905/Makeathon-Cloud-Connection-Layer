@@ -43,7 +43,7 @@ app.post("/api/sendParameters", async (req, res) => {
   );
   const decyptedDataJSON = await JSON.parse(decyptedData.toString("utf8"));
   const save_parameters = await new Parameter({
-    uid: data.vehicle_id,
+    uid: data.uid,
   });
   save_parameters.cypher.push({
     cypherData: decyptedDataJSON,
@@ -55,6 +55,16 @@ app.post("/api/sendParameters", async (req, res) => {
     status: "OK",
   });
 });
+
+app.get("/api/getParameters", async (req, res) => {
+  const id = req.query.id;
+  const data = await Parameter.find({ uid: id });
+  res.status(200).json({
+    status: "OK",
+    data: data,
+  });
+});
+
 // "192.168.113.196"
 http.listen(process.env.PORT || 5000, "192.168.113.196", () =>
   console.log("Server started at port 5000")
