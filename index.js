@@ -56,6 +56,14 @@ app.post("/api/sendParameters", async (req, res) => {
   });
 });
 
+app.get("/api/getAllParameters", async (req, res) => {
+  const data = await Parameter.find()
+  res.status(200).json({
+    status: "OK",
+    data: data
+  });
+});
+
 app.get("/api/getParameters", async (req, res) => {
   const id = req.query.id;
   const data = await Parameter.find({ uid: id });
